@@ -1,3 +1,10 @@
+const keymap = {
+  279168: 'left',
+  279165: 'up',
+  279167: 'right',
+  279166: 'down'
+}
+
 module.exports = async () => {
   process.stdin.setRawMode(true)
   return new Promise(resolve => process.stdin.once('data', data => {
@@ -7,6 +14,6 @@ module.exports = async () => {
       process.exit(1)
     }
     process.stdin.setRawMode(false)
-    resolve(Buffer.from(byteArray).toString())
+    resolve(keymap[byteArray.join('')] || Buffer.from(byteArray).toString())
   }))
 }
