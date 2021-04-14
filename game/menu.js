@@ -22,5 +22,26 @@ module.exports = async () => {
 }
 
 function menuDraw() {
+  const middle = Math.round(rows/2)
 
+  for (let i = 0; i < rows; i++) {
+    let row = ''
+
+    // Top button border
+    if (i === middle-1) {
+      row += 'top'
+    }
+    
+    // Bottom button border
+    if (i === middle+1) {
+      row += 'bottom'
+    }
+
+    // Button itself
+    if (i === middle) {
+      row += 'middle'
+    }
+
+    draw(row)
+  }
 }
