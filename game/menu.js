@@ -1,6 +1,7 @@
 const draw = (text) => console.log(text)
 const chalk = require('chalk')
 const debug = require('../util/debug')
+const keypress = require('../util/keypress')
 
 // Items
 let selected = 0
@@ -22,8 +23,12 @@ if (totalItemSpace + columns % 2 === 0) totalItemSpace--
 debug(itemSpace)
 debug(totalItemSpace)
 
-module.exports = () => {
+module.exports = async () => {
   menuDraw()
+
+  while(true) {
+    debug(await keypress())
+  }
 }
 
 function menuDraw() {

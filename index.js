@@ -1,3 +1,6 @@
+process.stdin.setRawMode(true)
 const menu = require('./game/menu')
 
-menu()
+;(async () => {
+  await menu()
+})()
