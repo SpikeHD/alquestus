@@ -5,7 +5,7 @@ const speeds = {
   fast: 5
 }
 
-module.exports = async (text, speed) => {
+module.exports = async (text, speed, linebreak = true) => {
   const arr = text.split('')
 
   for (let i = 0; i < arr.length; i++) {
@@ -13,12 +13,12 @@ module.exports = async (text, speed) => {
       setTimeout(() => {
         process.stdout.write(arr[i])
         res()
-      }, speeds[speed] || 50)
+      }, parseInt(speed) || speeds[speed] || 50)
     })
   }
 
   // Break line when done
-  process.stdout.write('\n')
+  if (linebreak) process.stdout.write('\n')
 
   return
 }
