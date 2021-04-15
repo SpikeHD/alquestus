@@ -7,10 +7,15 @@ const rl = readline.createInterface({
 module.exports = async () => {
   return await new Promise((res) => {
     rl.question('What is your name? ', (name) => {
-      res(name)
-
       // Clear console
       process.stdout.write('\033c')
+
+      rl.question('Skip intro? ', (skip) => {
+        res({ name, skip: skip.toLowerCase() === 'yes'} )
+
+        // Clear console
+        process.stdout.write('\033c')
+      })
     })
   })
 }

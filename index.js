@@ -8,11 +8,11 @@ const intro = require('./game/intro')
   await menu()
 
   // Name picker
-  let playerName = await name()
+  let {playername, skip} = await name()
 
   // Intro scene
-  await intro(playerName)
+  if (!skip) await intro(playername)
 
   // Once the menu is returned, we start the game!
-  await main(playerName)
+  await main(playername)
 })()

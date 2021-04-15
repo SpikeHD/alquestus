@@ -3,6 +3,13 @@ const type = require('../util/typeText')
 const keypress = require('../util/keypress')
 
 module.exports = async (playername) => {
+  keypress().then(() => {
+    // Clear console
+    process.stdout.write('\033c')
+
+    return
+  })
+
   await type(`You are ${playername}, a dungeoneer with a sense of adventure`, 'medium', false)
   await type('... ', 700, false)
   await type('Or maybe you aren\'t', 'fast', false)
@@ -16,11 +23,4 @@ module.exports = async (playername) => {
 
   await type('\n', 'fast')
   await type('(Press any key to continue, by the way)', 'fast')
-
-  await keypress()
-
-  // Clear console
-  process.stdout.write('\033c')
-
-  return
 }
