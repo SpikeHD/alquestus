@@ -3,9 +3,11 @@ const chalk = require('chalk')
 const debug = require('../util/debug')
 const keypress = require('../util/keypress')
 
+let menuActive = true
+
 // Items
 let selected = 0
-const buttons = ['Start', 'Quit', 'Etc']
+const buttons = ['Start', 'Options', 'Exit']
 
 const columns = process.stdout.columns
 const rows = process.stdout.rows-2
@@ -16,7 +18,7 @@ debug('Rows: ' + rows)
 module.exports = async () => {
   menuDraw()
 
-  while(true) {
+  while(menuActive) {
     const key = await keypress()
     
     switch(key) {
@@ -30,10 +32,22 @@ module.exports = async () => {
       selected--
 
       if (selected < 0) selected = buttons.length-1
+      break
+
+    case 'enter':
+      menuInputHandle()
+      break
+
+    case 'escape':
+      process.exit()
+      break
     }
 
     menuDraw()
+    debug(key)
   }
+
+  return
 }
 
 function menuDraw() {
@@ -45,7 +59,7 @@ function menuDraw() {
   for (let i = 0; i < rows; i++) {
     let row = ''
 
-    // Top button border
+    // Button borders
     if (i === middle-1 || i === middle+1) {
       buttons.forEach(b => {
         row += '+' + Array(b.length+2).fill('-').join('') + '+ '
@@ -62,5 +76,19 @@ function menuDraw() {
     }
 
     draw(row)
+  }
+}
+
+function menuInputHandle() {
+  const option = buttons[selected]
+
+  if (option === 'Exit') {
+    process.exit()
+  }
+
+  if (option === 'Start') {
+    menuActive = false
+    // Clear console
+    process.stdout.write('\033c')
   }
 }

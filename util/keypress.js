@@ -2,7 +2,9 @@ const keymap = {
   279168: 'left',
   279165: 'up',
   279167: 'right',
-  279166: 'down'
+  279166: 'down',
+  13: 'enter',
+  27: 'escape'
 }
 
 module.exports = async () => {
