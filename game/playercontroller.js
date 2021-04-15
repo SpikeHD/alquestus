@@ -3,7 +3,7 @@ const keypress = require('../util/keypress')
 /**
  * @param {Player} player 
  */
-module.exports.input = async (player) => {
+module.exports.input = async (player, maxX, maxY) => {
   const key = await keypress()
 
   switch(key) {
@@ -23,6 +23,11 @@ module.exports.input = async (player) => {
     player.x--
     break
   }
+
+  if (player.x < 0) player.x = 0
+  if (player.y < 0) player.y = 0
+  if (player.x > maxX) player.x = maxX
+  if (player.y > maxY) player.y = maxY
 
   return
 }

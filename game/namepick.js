@@ -11,7 +11,7 @@ module.exports = async () => {
       process.stdout.write('\033c')
 
       rl.question('Skip intro? ', (skip) => {
-        res({ name, skip: skip.toLowerCase() === 'yes'} )
+        res({ playername: name, skip: skip.toLowerCase() === 'yes'} )
 
         // Clear console
         process.stdout.write('\033c')

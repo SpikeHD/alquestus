@@ -14,25 +14,26 @@ let inProgress = true
 module.exports = async (playername) => {
   player = new Player(playername)
 
-  while(inProgress) {
-    await controller.input(player)
+  drawScreen()
 
-    console.log('got input')
+  while(inProgress) {
+    await controller.input(player, columns-2, rows)
 
     drawScreen()
   }
 }
 
 function drawScreen() {
-  // For each row
-  for (let y = 0; y < rows; y++) {
+  // Clear console
+  process.stdout.write('\033c')
+
+  // reverse Y loop for proper coords
+  for (let y = rows; y > 0; y--) {
     let row = ''
 
-    console.log(y)
-
-    for (let x = 0; x < columns; y++) {
+    for (let x = 0; x < columns; x++) {
       if (x === player.x && y === player.y) row += '0'
-      else row += '#'
+      else row += ' '
     }
 
     draw(row)
