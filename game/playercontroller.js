@@ -1,6 +1,8 @@
 const keypress = require('../util/keypress')
 
 /**
+ * Player input controller
+ * 
  * @param {Player} player 
  */
 module.exports.input = async (player, maxX, maxY) => {

@@ -4,6 +4,9 @@ const rl = readline.createInterface({
   output: process.stdout
 })
 
+/**
+ * Quick menu for name picking
+ */
 module.exports = async () => {
   return await new Promise((res) => {
     rl.question('What is your name? ', (name) => {

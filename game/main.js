@@ -8,7 +8,7 @@ const rows = process.stdout.rows-2
 
 let player
 let stage = 0
-let currentMap = {}
+let currentMap = worldgen.outside.create(stage)
 let inProgress = true
 
 module.exports = async (playername) => {
@@ -31,6 +31,7 @@ function drawScreen() {
   for (let y = rows; y > 0; y--) {
     let row = ''
 
+    // Player position
     for (let x = 0; x < columns; x++) {
       if (x === player.x && y === player.y) row += '0'
       else row += ' '

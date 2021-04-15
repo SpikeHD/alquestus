@@ -1,3 +1,7 @@
+/**
+ * Player object for keeping track of x/y coords, as well as other
+ * data like inventory and such.
+ */
 class Player {
   constructor(name) {
     this.name = name

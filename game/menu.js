@@ -5,22 +5,27 @@ const keypress = require('../util/keypress')
 
 let menuActive = true
 
-// Items
+// Button items
 let selected = 0
 const buttons = ['Start', 'Options', 'Exit']
 
+// For space calculation
 const columns = process.stdout.columns
 const rows = process.stdout.rows-2
 
 debug('Columns: ' + columns)
 debug('Rows: ' + rows)
 
+/**
+ * Draws menu until game is started
+ */
 module.exports = async () => {
   menuDraw()
 
   while(menuActive) {
     const key = await keypress()
     
+    // Menu controller
     switch(key) {
     case 'right':
       selected++
@@ -52,6 +57,9 @@ module.exports = async () => {
   return
 }
 
+/**
+ * Draws the buttons for the menu, and highlights the selected option
+ */
 function menuDraw() {
   // Clear console
   process.stdout.write('\033c')
@@ -81,6 +89,9 @@ function menuDraw() {
   }
 }
 
+/**
+ * Handle each menu option when selected
+ */
 function menuInputHandle() {
   const option = buttons[selected]
 
