@@ -47,6 +47,8 @@ module.exports = async () => {
     debug(key)
   }
 
+  // Clear console
+  process.stdout.write('\033c')
   return
 }
 
@@ -88,7 +90,5 @@ function menuInputHandle() {
 
   if (option === 'Start') {
     menuActive = false
-    // Clear console
-    process.stdout.write('\033c')
   }
 }
