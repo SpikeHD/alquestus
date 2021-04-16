@@ -5,7 +5,7 @@ const { random } = require('../math')
 module.exports.create = (difficulty) => {
   // Construct an object full of wall/item/chest/etc. coords
   return {
-    rooms: [room({ width: random(2, 6), height: random(2, 6) }, { x: Math.round(process.stdout.columns/2) , y: Math.round(process.stdout.rows/2) }, 1, 'left', 1)],
+    rooms: [room({ width: random(6, 10), height: random(2, 6) }, { x: Math.round(random(60, 120)) , y: Math.round(random(6, 10)) }, 1, 'left', 1)],
     mat: brick
   }
 }
