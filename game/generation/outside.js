@@ -2,6 +2,9 @@ const room = require('./room')
 const brick = require('./materials/brick')
 const { random } = require('../math')
 
+/**
+ * Create ouside environment
+ */
 module.exports.create = (difficulty) => {
   // Construct an object full of wall/item/chest/etc. coords
   return {

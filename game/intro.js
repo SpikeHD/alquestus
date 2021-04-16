@@ -2,6 +2,11 @@
 const type = require('../util/typeText')
 const keypress = require('../util/keypress')
 
+/**
+ * Main intro
+ * 
+ * @param {String} playername 
+ */
 module.exports = async (playername) => {
   await type(`You are ${playername}, a dungeoneer with a sense of adventure`, 'medium', false)
   await type('... ', 700, false)

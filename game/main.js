@@ -13,6 +13,11 @@ let stage = 0
 let currentMap = worldgen.outside.create(stage)
 let inProgress = true
 
+/**
+ * Main gameplay
+ * 
+ * @param {String} playername 
+ */
 module.exports = async (playername) => {
   player = new Player(playername)
 
@@ -34,6 +39,9 @@ module.exports = async (playername) => {
   }
 }
 
+/**
+ * Draw the current screen
+ */
 function drawScreen() {
   // Clear console
   process.stdout.write('\033c')
@@ -69,6 +77,7 @@ function drawScreen() {
         })
       })
       
+      // Draw player if it isn't colliding, otherwise an empty space
       if (x === player.x && y === player.y) {
         if (!drewWall) row += '0'
         else data.collided = true
