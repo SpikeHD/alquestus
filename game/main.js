@@ -47,11 +47,6 @@ function drawScreen() {
 
     // Player position
     for (let x = 0; x < columns; x++) {
-      if (x === 12 && y === 118) {
-        row += '&'
-        continue
-      }
-
       let drewWall = false
 
       // Check for wall creation

@@ -65,6 +65,7 @@ function menuDraw() {
   process.stdout.write('\033c')
 
   const middle = Math.round(rows/2)
+  let str = ''
 
   for (let i = 0; i < rows; i++) {
     let row = ''
