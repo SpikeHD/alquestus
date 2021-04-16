@@ -1,12 +1,13 @@
 const keypress = require('../util/keypress')
 
 /**
- * Player input controller
+ * Player input controller, returns last coords
  * 
  * @param {Player} player 
  */
 module.exports.input = async (player, maxX, maxY) => {
   const key = await keypress()
+  const lastCoords = { x: player.x, y: player.y }
 
   switch(key) {
   case 'up':
@@ -31,5 +32,5 @@ module.exports.input = async (player, maxX, maxY) => {
   if (player.x > maxX) player.x = maxX
   if (player.y > maxY) player.y = maxY
 
-  return
+  return lastCoords
 }

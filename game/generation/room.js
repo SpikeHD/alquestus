@@ -17,7 +17,7 @@ module.exports = (size, location, exits, entranceSide, entranceOffset) => {
     // Top
     {
       angle: 'horiz',
-      size: size.width,
+      size: size.width-1,
       start: { x: location.x, y: location.y + size.height }
     },
     // Right
@@ -29,7 +29,7 @@ module.exports = (size, location, exits, entranceSide, entranceOffset) => {
     // Bottom
     {
       angle: 'horiz',
-      size: size.width,
+      size: size.width-1,
       start: { x: location.x, y: location.y }
     },
     // Left
