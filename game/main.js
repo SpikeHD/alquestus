@@ -20,6 +20,8 @@ module.exports = async (playername) => {
     await controller.input(player, columns-2, rows)
 
     drawScreen()
+
+    console.log(`${player.x}-${player.y}`)
   }
 }
 
@@ -33,10 +35,43 @@ function drawScreen() {
 
     // Player position
     for (let x = 0; x < columns; x++) {
+      if (x === 12 && y === 118) {
+        row += '&'
+        continue
+      }
+
       if (x === player.x && y === player.y) row += '0'
-      else row += ' '
+      else {
+        let drewWall = false
+
+        // Check for wall creation
+        currentMap.rooms.forEach(room => {
+          room.forEach(wall => {
+            // We found a wall start position, draw it
+            if (wall.start.x === x && wall.start.y === y) {
+              // Draw that mf wall
+              if (wall.angle === 'horiz') {
+                row += Array(wall.size).fill('#').join('')
+                // Increment x automatically so we don't have to loop over the same positions
+                x += wall.size
+              }
+            } else if (wall.start.x === x && between(y, wall.start.y, wall.start.y + wall.size) && wall.angle === 'vert') {
+              // If the x is correct, and the y is within the size it should draw, draw it
+              row += '#'
+
+              drewWall = true
+            }
+          })
+        })
+
+        if (!drewWall) row += ' '
+      }
     }
 
     draw(row)
   }
+}
+
+function between(val, min, max) {
+  return val >= min && val <= max
 }
