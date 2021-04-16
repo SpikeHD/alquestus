@@ -1,4 +1,5 @@
 const draw = (text) => console.log(text)
+const { between } = require('./math')
 const Player = require('./classes/Player')
 const worldgen = require('./generation/worldgen')
 const controller = require('./playercontroller')
@@ -83,8 +84,4 @@ function drawScreen() {
   }
 
   return data
-}
-
-function between(val, min, max) {
-  return val >= min && val <= max
 }
