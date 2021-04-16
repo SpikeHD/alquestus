@@ -20,8 +20,6 @@ module.exports = async (playername) => {
     await controller.input(player, columns-2, rows)
 
     drawScreen()
-
-    console.log(`${player.x}-${player.y}`)
   }
 }
 
@@ -51,13 +49,13 @@ function drawScreen() {
             if (wall.start.x === x && wall.start.y === y) {
               // Draw that mf wall
               if (wall.angle === 'horiz') {
-                row += Array(wall.size).fill('#').join('')
+                row += Array(wall.size).fill(currentMap.mat).join('')
                 // Increment x automatically so we don't have to loop over the same positions
                 x += wall.size
               }
             } else if (wall.start.x === x && between(y, wall.start.y, wall.start.y + wall.size) && wall.angle === 'vert') {
               // If the x is correct, and the y is within the size it should draw, draw it
-              row += '#'
+              row += currentMap.mat
 
               drewWall = true
             }
