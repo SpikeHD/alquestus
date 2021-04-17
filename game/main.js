@@ -79,7 +79,7 @@ function drawScreen() {
       
       // Draw player if it isn't colliding, otherwise an empty space
       if (x === player.x && y === player.y) {
-        if (!drewWall) row += '0'
+        if (!drewWall) row += 'ඞ'
         else data.collided = true
       } else if (!drewWall) row += ' '
     }
