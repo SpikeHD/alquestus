@@ -33,23 +33,24 @@ function generateWalls(first, second, holes) {
     // Flip the axis
     // NOTE TO FUTURE SELF YES THIS IS SUPPOSED TO FLIP THEM YOU FUCKING BUFFOON
     const axis = fSide.angle === 'horiz' ? 'y':'x'
+    // YES THIS NEEDS TO BE FLIPPED TOO BITCH
+    const drawAngle = fSide.angle === 'horiz' ? 'vert':'horiz'
+    let size = Math.round((holes[1][axis] - holes[0][axis]))/2
 
     // Push the first half of the wall, which ends where the vertical one will begin
     walls.push({
-      angle: fSide.angle,
-      size: (holes[0][axis] + holes[1][axis])/2,
-      start: { x: holes[0].x + (axis === 'x' ? 1:0), y: holes[0].y + (axis === 'y' ? 1:0) }
+      angle: drawAngle,
+      size: size,
+      start: { x: holes[0].x + (axis === 'x' ? 0:1), y: holes[0].y + (axis === 'y' ? 0:1) }
     })
 
     // Other side, yknow, since it's a hallway
     walls.push({
-      angle: fSide.angle,
-      size: (holes[0][axis] + holes[1][axis])/2,
-      start: { x: holes[0].x - (axis === 'x' ? 1:0), y: holes[0].y - (axis === 'y' ? 1:0) }
+      angle: drawAngle,
+      size: size,
+      start: { x: holes[0].x - (axis === 'x' ? 0:1), y: holes[0].y - (axis === 'y' ? 0:1) }
     })
   }
-
-  console.log(walls)
 
   return walls
 }

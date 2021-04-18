@@ -10,14 +10,16 @@ module.exports.create = (difficulty) => {
   // Construct an object full of wall/item/chest/etc. coords
   let obj =  {
     rooms: [
-      room({ width: random(8, 14), height: random(2, 8) }, { x: Math.round(random(30, 120)) , y: Math.round(random(6, 12)) }, 'left', 1),
-      room({ width: random(8, 14), height: random(2, 8) }, { x: Math.round(random(30, 120)) , y: Math.round(random(6, 12)) }, 'right', 1)
+      room({ width: random(8, 14), height: random(2, 8) }, { x: Math.round(random(30, 120)) , y: Math.round(random(6, 12)) }, 'right', 1),
+      room({ width: random(8, 14), height: random(2, 8) }, { x: Math.round(random(30, 120)) , y: Math.round(random(6, 12)) }, 'left', 1)
     ],
     theme: {
       wall: brick
     },
     corridors: []
   }
+
+  obj.rooms = obj.rooms.sort((a, b) => a[0].start.x > b[0].start.x)
 
   obj.rooms.forEach((room, i) => {
     // Don't create a corridor for the last room
