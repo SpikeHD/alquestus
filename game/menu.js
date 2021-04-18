@@ -72,7 +72,7 @@ function menuDraw() {
 
     // Button borders
     if (i === middle-1 || i === middle+1) {
-      row += Array((columns/2)-buttonLength).fill(' ').join('')
+      row += Array(Math.round(columns/2)-buttonLength).fill(' ').join('')
 
       buttons.forEach(b => {
         row += '+' + Array(b.length+2).fill('-').join('') + '+ '
@@ -81,7 +81,7 @@ function menuDraw() {
 
     // Button itself
     if (i === middle) {
-      row += Array((columns/2)-buttonLength).fill(' ').join('')
+      row += Array(Math.round(columns/2)-buttonLength).fill(' ').join('')
 
       buttons.forEach((b, i) => {
         if (selected === i) b = chalk.bgRed(b)
