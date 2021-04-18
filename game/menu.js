@@ -65,13 +65,15 @@ function menuDraw() {
   process.stdout.write('\033c')
 
   const middle = Math.round(rows/2)
-  let str = ''
+  const buttonLength = buttons.join('').length + (4 * buttons.length)
 
   for (let i = 0; i < rows; i++) {
     let row = ''
 
     // Button borders
     if (i === middle-1 || i === middle+1) {
+      row += Array((columns/2)-buttonLength).fill(' ').join('')
+
       buttons.forEach(b => {
         row += '+' + Array(b.length+2).fill('-').join('') + '+ '
       })
@@ -79,6 +81,8 @@ function menuDraw() {
 
     // Button itself
     if (i === middle) {
+      row += Array((columns/2)-buttonLength).fill(' ').join('')
+
       buttons.forEach((b, i) => {
         if (selected === i) b = chalk.bgRed(b)
 
