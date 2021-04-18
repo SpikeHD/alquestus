@@ -60,17 +60,22 @@ function drawScreen() {
       // Check for wall creation
       currentMap.rooms.forEach(room => {
         room.forEach(wall => {
+          // If this wall should actually NOT be drawn, like if it's an entrance
+          if (currentMap.corridors.find(c => c.holes.find(h => h.x === x && h.y === y))) {
+            return
+          }
+
           // We found a wall start position, draw it
           if (wall.start.y === y && between(x, wall.start.x, wall.start.x + wall.size) && wall.angle === 'horiz' && !drewWall) {
             // Draw that mf wall
-            row += currentMap.mat
+            row += currentMap.theme.wall
 
             drewWall = true
           }
           
           if (wall.start.x === x && between(y, wall.start.y, wall.start.y + wall.size) && wall.angle === 'vert' && !drewWall) {
             // If the x is correct, and the y is within the size it should draw, draw it
-            row += currentMap.mat
+            row += currentMap.theme.wall
 
             drewWall = true
           }
