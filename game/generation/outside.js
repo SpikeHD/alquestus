@@ -11,7 +11,7 @@ module.exports.create = (difficulty) => {
   let obj =  {
     rooms: [
       room({ width: random(8, 14), height: random(2, 8) }, { x: Math.round(random(30, 120)) , y: Math.round(random(6, 12)) }, 'left', 1),
-      room({ width: random(8, 14), height: random(2, 8) }, { x: Math.round(random(30, 120)) , y: Math.round(random(6, 12)) }, 'left', 1)
+      room({ width: random(8, 14), height: random(2, 8) }, { x: Math.round(random(30, 120)) , y: Math.round(random(6, 12)) }, 'right', 1)
     ],
     theme: {
       wall: brick
