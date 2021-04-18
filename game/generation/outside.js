@@ -19,8 +19,6 @@ module.exports.create = (difficulty) => {
     corridors: []
   }
 
-  obj.rooms = obj.rooms.sort((a, b) => a[0].start.x > b[0].start.x)
-
   obj.rooms.forEach((room, i) => {
     // Don't create a corridor for the last room
     if (i === obj.rooms.length-1) return
