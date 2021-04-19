@@ -10,16 +10,13 @@
  * @param {Array} exits 
  * @param {String} entranceSide
  */
-module.exports = (size, location, exits, entranceSide, entranceOffset) => {
-  // TODO: entrace/exit calculation
-
-  return [
+module.exports = (size, location, entranceSide) => {
+  const sides = [
     // Top
     {
       angle: 'horiz',
       size: size.width-1,
       start: { x: location.x, y: location.y + size.height },
-      entrance: true
     },
     // Right
     {
@@ -40,4 +37,11 @@ module.exports = (size, location, exits, entranceSide, entranceOffset) => {
       start: { x: location.x, y: location.y }
     }
   ]
+
+  if (entranceSide === 'top') sides[0].entrance = true
+  if (entranceSide === 'right') sides[1].entrance = true
+  if (entranceSide === 'bottom') sides[2].entrance = true
+  if (entranceSide === 'left') sides[3].entrance = true
+
+  return sides
 }

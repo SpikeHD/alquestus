@@ -60,19 +60,23 @@ function drawScreen() {
       // Check for wall creation
       currentMap.rooms.forEach(room => {
         room.forEach(wall => {
-          // We found a wall start position, draw it
-          if (wall.start.y === y && between(x, wall.start.x, wall.start.x + wall.size) && wall.angle === 'horiz' && !drewWall) {
-            // Draw that mf wall
-            row += currentMap.mat
+          if (!drewWall) {
+            drewWall = drawWall(wall, x, y)
 
-            drewWall = true
+            // If we need to draw a wall
+            if (drewWall) row += currentMap.theme.wall
           }
-          
-          if (wall.start.x === x && between(y, wall.start.y, wall.start.y + wall.size) && wall.angle === 'vert' && !drewWall) {
-            // If the x is correct, and the y is within the size it should draw, draw it
-            row += currentMap.mat
+        })
+      })
 
-            drewWall = true
+      // Check for corridor creation
+      currentMap.corridors.forEach(corridor => {
+        corridor.walls.forEach(wall => {
+          if (!drewWall) {
+            drewWall = drawWall(wall, x, y)
+
+            // If we need to draw a wall
+            if (drewWall) row += currentMap.theme.wall
           }
         })
       })
@@ -88,4 +92,28 @@ function drawScreen() {
   }
 
   return data
+}
+
+/**
+ * "Should I draw a wall at this coordinate?" function
+ * 
+ * @param {Object} wall 
+ * @param {String} row 
+ * @returns 
+ */
+function drawWall(wall, x, y) {
+  // If this wall should actually NOT be drawn, like if it's an entrance
+  if (currentMap.corridors.find(c => c.holes.find(h => h.x === x && h.y === y))) {
+    return false
+  }
+
+  if (wall.start.y === y && between(x, wall.start.x, wall.start.x + wall.size) && wall.angle === 'horiz') {
+    return true
+  }
+
+  if (wall.start.x === x && between(y, wall.start.y, wall.start.y + wall.size) && wall.angle === 'vert') {
+    return true
+  }
+
+  return false
 }
