@@ -26,6 +26,7 @@ function getWallHole(side) {
 function generateWalls(first, second, holes) {
   const fSide = first.find(x => x.entrance)
   const sSide = second.find(x => x.entrance)
+  const lead = []
   const walls = []
 
   // Horiz with Horiz or Vert with Vert
@@ -37,10 +38,6 @@ function generateWalls(first, second, holes) {
     const drawAngle = fSide.angle === 'horiz' ? 'vert':'horiz'
     let length = holes[1][axis === 'x' ? 'y':'x'] - holes[0][axis === 'x' ? 'y':'x']
     let size = Math.round((holes[1][axis] - holes[0][axis])/2)
-
-    // Ending positions
-    const endX = holes[1].x - size
-    const endY = holes[1].y - size
 
     // This is the line that leads EXACTLY from the 
     const startLine = {
@@ -56,8 +53,16 @@ function generateWalls(first, second, holes) {
     const midLine = {
       angle: fSide.angle,
       size: length,
-      start: { x: startLine.start.x + size, y: startLine.start.y + size }
+      start: { x: startLine.start.x + size, y: startLine.start.y }
     }
+
+    // !! WARNING !! Size/length are reassigned lol
+    if (holes[1].x < holes[0].x) size = -size
+    if (holes[1].y < holes[0].y) length = -length
+
+    // Ending positions
+    const endX = holes[1].x - size
+    const endY = holes[1].y - length
 
     const endLine = {
       angle: drawAngle,
@@ -65,10 +70,20 @@ function generateWalls(first, second, holes) {
       start: { x: endX, y: endY }
     }
 
-    walls.push(startLine)
-    walls.push(midLine)
-    walls.push(endLine)
+    lead.push(startLine, midLine, endLine)
   }
+
+  lead.forEach(l => {
+    // Offset positions by 1 and -1 to create a hallway
+    let upper = {...l}, lower = {...l}
+
+    upper.start.x = upper.start.x + 1
+    upper.start.y = upper.start.y + 1
+    lower.start.x = lower.start.x - 1
+    lower.start.y = lower.start.y - 1
+
+    walls.push(upper, lower)
+  })
 
   return walls
 }
