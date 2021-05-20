@@ -76,7 +76,7 @@ function drawScreen() {
             drewWall = drawWall(wall, x, y)
 
             // If we need to draw a wall
-            if (drewWall) row += 'T'//row += currentMap.theme.wall
+            if (drewWall) row += currentMap.theme.wall
           }
         })
       })

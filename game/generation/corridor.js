@@ -46,14 +46,17 @@ function generateWalls(first, second, holes) {
       start: { x: holes[0].x, y: holes[0].y }
     }
 
+    let midY = startLine.start.y
+
     if (length < 0) {
       length = -length
+      midY = midY - length
     }
 
     const midLine = {
       angle: fSide.angle,
       size: length,
-      start: { x: startLine.start.x + size, y: startLine.start.y }
+      start: { x: startLine.start.x + size, y: midY }
     }
 
     // !! WARNING !! Size/length are reassigned lol
@@ -62,7 +65,7 @@ function generateWalls(first, second, holes) {
 
     // Ending positions
     const endX = holes[1].x - size
-    const endY = holes[1].y - length
+    const endY = holes[1].y
 
     const endLine = {
       angle: drawAngle,
@@ -78,9 +81,9 @@ function generateWalls(first, second, holes) {
     let {angle, size, start} = l
 
     walls.push({
-      angle, size, start: { x: start.x + 1, y: start.y + 1 }
+      angle, size, start: { x: start.x - 1, y: start.y + 1 }
     }, {
-      angle, size, start: { x: start.x - 1, y: start.y - 1 }
+      angle, size, start: { x: start.x + 1, y: start.y - 1 }
     })
   })
 
