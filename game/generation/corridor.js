@@ -69,8 +69,8 @@ function generateWalls(first, second, holes) {
 
     const endLine = {
       angle: drawAngle,
-      size,
-      start: { x: endX, y: endY }
+      size: size-1,
+      start: { x: endX+1, y: endY }
     }
 
     lead.push(startLine, midLine, endLine)
@@ -79,11 +79,14 @@ function generateWalls(first, second, holes) {
   lead.forEach(l => {
     // Offset positions by 1 and -1 to create a hallway
     let {angle, size, start} = l
+    let xOffset = 1
+
+    if (holes[1].y < holes[0].y) xOffset = -1
 
     walls.push({
-      angle, size, start: { x: start.x - 1, y: start.y + 1 }
+      angle, size, start: { x: start.x - xOffset, y: start.y+1 }
     }, {
-      angle, size, start: { x: start.x + 1, y: start.y - 1 }
+      angle, size, start: { x: start.x + xOffset, y: start.y-1 }
     })
   })
 
